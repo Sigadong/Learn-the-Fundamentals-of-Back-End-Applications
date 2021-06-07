@@ -1,7 +1,6 @@
 class NotesHandler {
   constructor(service) {
     this._service = service;
-
     this.postNoteHandler = this.postNoteHandler.bind(this);
     this.getNotesHandler = this.getNotesHandler.bind(this);
     this.getNoteByIdHandler = this.getNoteByIdHandler.bind(this);
