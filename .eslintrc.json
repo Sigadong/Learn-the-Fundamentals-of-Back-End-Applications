@@ -24,6 +24,8 @@
         "no-new": 0,
         "no-plusplus": 0,
         "no-await-in-loop": 0,
-        "no-unused-vars": 0
+        "no-unused-vars": 0,
+        "camelcase": 0,
+        "no-undef": 0
     }
 }
