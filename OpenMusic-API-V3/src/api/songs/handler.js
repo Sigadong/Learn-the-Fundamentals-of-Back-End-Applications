@@ -28,11 +28,7 @@ class SongsHandler {
     return {
       status: 'success',
       data: {
-        songs: allSong.map((song) => ({
-          id: song.id,
-          title: song.title,
-          performer: song.performer,
-        })),
+        songs: allSong,
       },
     };
   }

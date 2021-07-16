@@ -4,8 +4,9 @@ const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
 
 class PlaylistSongsService {
-  constructor() {
+  constructor(cacheService) {
     this._pool = new Pool();
+    this._cacheService = cacheService;
   }
 
   async addSongToPlaylist(playlistId, songId) {
@@ -20,23 +21,32 @@ class PlaylistSongsService {
     if (!result.rows[0].id) {
       throw new InvariantError('Song failed to add to playlists.');
     }
+
+    await this._cacheService.delete(`playlistsongs:${playlistId}`);
     return result.rows[0].id;
   }
 
   async getSongsToPlaylist(playlistId) {
-    const query = {
-      text: `SELECT songs.id, songs.title, songs.performer FROM playlistsongs 
+    try {
+      const result = await this._cacheService.get(`playlistsongs:${playlistId}`);
+      return JSON.parse(result);
+    } catch (error) {
+      const query = {
+        text: `SELECT songs.id, songs.title, songs.performer FROM playlistsongs 
       JOIN songs ON songs.id = playlistsongs.song_id
       WHERE playlistsongs.playlist_id = $1
       GROUP BY playlistsongs.song_id, songs.id`,
-      values: [playlistId],
-    };
-    const result = await this._pool.query(query);
+        values: [playlistId],
+      };
+      const result = await this._pool.query(query);
 
-    if (!result.rowCount) {
-      throw new NotFoundError('Song in Playlists not found.');
+      if (!result.rowCount) {
+        throw new NotFoundError('Song in Playlists not found.');
+      }
+
+      await this._cacheService.set(`playlistsongs:${playlistId}`, JSON.stringify(result.rows));
+      return result.rows;
     }
-    return result.rows;
   }
 
   async deleteSongFromPlaylist(playlistId, songId) {
@@ -49,6 +59,7 @@ class PlaylistSongsService {
     if (!result.rowCount) {
       throw new InvariantError('Song failed to be removed from playlists.');
     }
+    await this._cacheService.delete(`playlistsongs:${playlistId}`);
   }
 
   async verifyPlaylistSongs(playlistId, songId) {

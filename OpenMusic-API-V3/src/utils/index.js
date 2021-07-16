@@ -18,15 +18,6 @@ const mapDBToModel = {
     insertedAt: inserted_at,
     updatedAt: updated_at,
   }),
-  modelPlaylists: ({
-    id,
-    name,
-    username,
-  }) => ({
-    id,
-    name,
-    username,
-  }),
 };
 
 module.exports = { mapDBToModel };
