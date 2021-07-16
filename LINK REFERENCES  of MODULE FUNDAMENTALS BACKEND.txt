@@ -1,0 +1,113 @@
+1.Hapi Plugin Documentation
+  ==> https://hapi.dev/plugins/
+2. Halaman Plugins yang disediakan oleh Hapi
+  ==> https://hapi.dev/tutorials/plugins/?lang=en_US
+
+3. Memahami perilaku 'this' secara lebih detail
+  ==> https://www.smashingmagazine.com/2018/10/taming-this-javascript-bind-operator/
+
+4. Mengetahui secara detail fungsi dari function.prototype.bind
+  ==> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
+
+5. Data Validation Menggunakan Joi di JavaScript.
+  ==> https://joi.dev/
+
+6. RDMS: Postgre SQL
+  ==> https://www.postgresql.org/download/
+ - Data Type
+  ==> https://www.postgresql.org/docs/current/datatype.html
+ - Constraints (UNIQUE,NOT NULL dan PRIMARY KEY)
+  ==> https://www.postgresql.org/docs/current/ddl-constraints.html
+
+7. Node-postgres: tools yg dapat dimanfaatkan utk berinteraksi dgn database PostgresSQL melalui Node.js
+  ==> https://node-postgres.com/
+
+8. Mengonfigurasi Environment 
+  Dalam menyiapkan variable environment, kita akan memanfaatkan package bernama dotenv.
+  ==> https://www.npmjs.com/package/dotenv
+	
+9. Dengan node-pg-migrate kita dapat mudah dalam mengelola struktur database seperti create table, alter table, atau drop table karena kita dapat melakukan itu dengan kode JavaScript
+  ==> https://www.npmjs.com/package/node-pg-migrate 
+ - pg-node-migrate documentation 
+  ==> https://salsita.github.io/node-pg-migrate/#/
+
+10. Best practice dalam menyimpan password di database
+  ==> https://www.npmjs.com/package/bcrypt
+
+11. Header Authorization digunakan untuk menampung nilai autentik pengguna yang terautentikasi.
+  ==> https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization
+
+12. Bila kita ingin menggunakan basic authentication, sangat direkomendasikan untuk menggunakan protokol HTTPS
+    HTTPS sudah memiliki enkripsi untuk setiap transaksi datanya.
+  ==> https://developers.google.com/search/docs/advanced/security/https
+
+13. Best practice dalam menyimpan password di database.
+  ==> https://www.npmjs.com/package/bcrypt
+
+14. 4 Most Used Authentication Methods
+  ==> https://blog.restcase.com/4-most-used-rest-api-authentication-methods/
+
+15. OAuth2 adalah protokol standar industri untuk perihal otorisasi
+  ==> https://tools.ietf.org/html/rfc6749
+    OAuth2 Specification distandarisasi dan dikembangkan oleh IETF OAuth Working Group.
+  ==> https://oauth.net/2/
+
+16. JSON Web Token (JWT) adalah format token yang banyak digunakan pada Token-Based Authentication
+  ==> https://tools.ietf.org/html/rfc7519
+
+17. Skema Token-Based Authentication sangat cocok digunakan pada: Arsitektur Microservices.
+  ==> https://microservices.io/patterns/microservices.html
+
+
+18. JWT Payload memiliki Registered Claim Names atau properti standar yang penggunaan dan nama propertinya sudah ditentukan secara spesifik.
+  ==> https://tools.ietf.org/html/rfc7519#section-4.1
+
+19. Selain access token, OAuth2 mengenalkan refresh token sebagai solusi agar dapat memperbarui access token tanpa perlu melakukan login ulang
+  ==> https://tools.ietf.org/html/rfc6749#section-1.5
+
+20. Authentication di Hapi didasarkan pada konsep schema dan strategies.
+    Schema:method yg menjelaskan cara menangani autentikasi. Strategies: bentuk implementasi dari schema autentikasi.
+  ==> https://hapi.dev/tutorials/auth/?lang=en_US
+
+21. Lebih detail tentang API dari @hapi/jwt.
+  ==> https://hapi.dev/module/jwt/api/?v=2.0.1
+
+
+22. Dokumentasi dari node-pg-migrate
+  ==> https://salsita.github.io/node-pg-migrate/#/
+
+23. Destructuring object with New Name.
+  ==> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#object_destructuring
+
+24. Untuk melakukan query pencarian, seperti pencarian berdasarkan nilai kolom username:
+  ==> https://www.postgresql.org/docs/8.3/functions-matching.html
+
+25. RabbitMQ merupakan salah satu message broker open-source yang populer digunakan
+  ==> https://www.rabbitmq.com/
+   - Dalam menjalankan tugasnya sebagai message broker, RabbitMQ secara standar memanfaatkan protokol Advance Queue Messaging Protocol (AMQP)
+     https://www.amqp.org/
+   - yang merupakan standar dalam penerapan message-oriented middleware atau infrastruktur hardware atau software yang dapat mengirim pesan antar sistem yang terdistribusi.
+     https://docs.oracle.com/cd/E19316-01/820-6424/aeraq/index.html
+   - Selain AMQP, RabbitMQ juga dapat mendukung banyak protokol seperti STOMP, MQTT, HTTP, dan WebSocket.
+     https://www.rabbitmq.com/protocols.html
+   - Sebelum melakukan install RabbitMQ di komputer lokal, terlebih dahulu harus install erlang karena faktor dependency.
+     https://www.erlang.org/downloads
+
+26. Canggihnya dari nodemailer ini adalah ia mendukung berbagai macam provider SMTP. Bahkan Gmail sekalipun yang notabene memiliki keamanan yang andal.
+  ==> -https://nodemailer.com/	-https://nodemailer.com/usage/#sending-mail	-https://nodemailer.com/message/
+
+27. Untuk mengirimkan email menggunakan Gmail melalui nodemailer, akun Gmail Anda butuh mengaktifkan 'Allow less secure apps'.
+  ==> https://myaccount.google.com/lesssecureapps
+   - Matikan fitur captcha pada akun Gmail Anda. Dimana account tersebut digunakan sebagai 'User Sendmailer' pada packgage nodemailer.
+  ==> https://accounts.google.com/DisplayUnlockCaptcha
+
+28 Amazon MQ adalah layanan message broker terkelola untuk Apache ActiveMQ dan RabbitMQ yang memudahkan penyiapan dan pengoperasian message broker di AWS.
+   Amazon MQ memiliki fitur Free Tier. Sehingga kita bisa mencobanya secara gratis selama spesifikasi server broker kita memenuhi ketentuan Free Tier.
+  ==>-https://aws.amazon.com/id/free/	-https://aws.amazon.com/id/amazon-mq/pricing/?nc2=type_a
+
+
+
+
+ID : 407823841640
+USER: Developer
+PASS: Developer2019
