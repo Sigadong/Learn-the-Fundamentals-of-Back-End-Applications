@@ -127,7 +127,7 @@ const init = async () => {
       responseError.code(response.statusCode);
       return responseError;
     }
-    return response || response.continue;
+    return response.continue || response;
   });
 
   await server.start();

@@ -11,13 +11,13 @@ class PlaylistsHandler {
     this._validator.validatePlaylistPayload(request.payload);
     const { name } = request.payload;
     const { id: credentialUserId } = request.auth.credentials;
-    const playlistById = await this._service.addPlaylist({ name, owner: credentialUserId });
+    const playlistId = await this._service.addPlaylist(name, credentialUserId);
 
     const response = h.response({
       status: 'success',
       message: 'Playlist was successfully added.',
       data: {
-        playlistId: playlistById,
+        playlistId,
       },
     });
     response.code(201);
@@ -26,11 +26,11 @@ class PlaylistsHandler {
 
   async getPlaylistsHandler(request, h) {
     const { id: credentialUserId } = request.auth.credentials;
-    const allPlaylist = await this._service.getPlaylists(credentialUserId);
+    const playlists = await this._service.getPlaylists(credentialUserId);
     const response = h.response({
       status: 'success',
       data: {
-        playlists: allPlaylist,
+        playlists,
       },
     });
     return response;

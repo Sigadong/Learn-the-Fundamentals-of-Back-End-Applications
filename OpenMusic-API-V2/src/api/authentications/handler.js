@@ -14,16 +14,16 @@ class AuthenticationsHandler {
     const { username, password } = request.payload;
     const id = await this._usersService.verifyUserCredential(username, password);
 
-    const resultAccessToken = this._tokenManager.generateAccessToken({ id });
-    const resultRefreshToken = this._tokenManager.generateRefreshToken({ id });
-    await this._authenticationsService.addRefreshToken(resultRefreshToken);
+    const accessToken = this._tokenManager.generateAccessToken({ id });
+    const refreshToken = this._tokenManager.generateRefreshToken({ id });
+    await this._authenticationsService.addRefreshToken(refreshToken);
 
     const response = h.response({
       status: 'success',
       message: 'Authentication was successfully added.',
       data: {
-        accessToken: resultAccessToken,
-        refreshToken: resultRefreshToken,
+        accessToken,
+        refreshToken,
       },
     });
     response.code(201);
@@ -36,12 +36,12 @@ class AuthenticationsHandler {
     await this._authenticationsService.verifyRefreshToken(refreshToken);
     const { id } = this._tokenManager.verifyRefreshToken(refreshToken);
 
-    const resultAccessToken = this._tokenManager.generateAccessToken({ id });
+    const accessToken = this._tokenManager.generateAccessToken({ id });
     const response = h.response({
       status: 'success',
       message: 'Access Token successfully updated.',
       data: {
-        accessToken: resultAccessToken,
+        accessToken,
       },
     });
     return response;

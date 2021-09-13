@@ -37,11 +37,11 @@ class PlaylistSongsHandler {
 
     const { id: credentialUserId } = request.auth.credentials;
     await this._playlistsService.verifyPlaylistAccess(playlistId, credentialUserId);
-    const allSong = await this._service.getSongsToPlaylist(playlistId);
+    const songs = await this._service.getSongsToPlaylist(playlistId);
     const response = h.response({
       status: 'success',
       data: {
-        songs: allSong,
+        songs,
       },
     });
     return response;
