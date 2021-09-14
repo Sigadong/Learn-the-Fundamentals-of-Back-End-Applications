@@ -26,18 +26,18 @@ class SongsService {
     if (!result.rows[0].id) {
       throw new InvariantError('Song failed to add.');
     }
-    await this._cacheService.delete(`songs:${date.getDay()}`);
+    await this._cacheService.delete(`songs:${date.getFullYear()}`);
     return result.rows[0].id;
   }
 
   async getSongs() {
     const date = new Date();
     try {
-      const result = await this._cacheService.get(`songs:${date.getDay()}`);
+      const result = await this._cacheService.get(`songs:${date.getFullYear()}`);
       return JSON.parse(result);
     } catch (error) {
       const result = await this._pool.query('SELECT id, title, performer FROM songs');
-      await this._cacheService.set(`songs:${date.getDay()}`, JSON.stringify(result.rows));
+      await this._cacheService.set(`songs:${date.getFullYear()}`, JSON.stringify(result.rows));
       return result.rows;
     }
   }
@@ -48,7 +48,7 @@ class SongsService {
       values: [id],
     };
     const result = await this._pool.query(query);
-    const mappedResult = result.rows.map(mapDBToModel.modelSongs)[0];
+    const mappedResult = result.rows.map(mapDBToModel)[0];
 
     if (!result.rowCount) {
       throw new NotFoundError('Song not found!');
@@ -57,7 +57,7 @@ class SongsService {
     return mappedResult;
   }
 
-  async editSongById(id, { title, year, performer, genre, duration }) {
+  async editSongById({ id, title, year, performer, genre, duration }) {
     const updatedAt = new Date().toISOString();
     const query = {
       text: 'UPDATE songs SET title = $1, year = $2, performer = $3, genre = $4, duration = $5, updated_at = $6 WHERE id = $7 RETURNING id',

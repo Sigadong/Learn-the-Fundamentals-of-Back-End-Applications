@@ -10,13 +10,13 @@ class UploadsHandler {
   async postUploadPictureHandler(request, h) {
     const { data } = request.payload;
     this._validator.validatePictureHeaders(data.hapi.headers);
-    const pictureLocation = await this._service.writeFile(data, data.hapi);
+    const pictureUrl = await this._service.writeFile(data, data.hapi);
 
     const response = h.response({
       status: 'success',
       message: 'Image uploaded successfully',
       data: {
-        pictureUrl: pictureLocation,
+        pictureUrl,
       },
     });
     response.code(201);

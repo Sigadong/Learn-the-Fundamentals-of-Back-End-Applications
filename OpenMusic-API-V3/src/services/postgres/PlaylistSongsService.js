@@ -9,7 +9,7 @@ class PlaylistSongsService {
     this._cacheService = cacheService;
   }
 
-  async addSongToPlaylist(playlistId, songId) {
+  async addSongToPlaylist({ playlistId, songId, userId }) {
     await this.verifyPlaylistSongs(playlistId, songId);
     const id = `playlistsongs-${nanoid(16)}`;
     const query = {
@@ -22,13 +22,13 @@ class PlaylistSongsService {
       throw new InvariantError('Song failed to add to playlists.');
     }
 
-    await this._cacheService.delete(`playlistsongs:${playlistId}`);
+    await this._cacheService.delete(`playlistsongs:${userId}-${playlistId}`);
     return result.rows[0].id;
   }
 
-  async getSongsToPlaylist(playlistId) {
+  async getSongsToPlaylist(playlistId, userId) {
     try {
-      const result = await this._cacheService.get(`playlistsongs:${playlistId}`);
+      const result = await this._cacheService.get(`playlistsongs:${userId}-${playlistId}`);
       return JSON.parse(result);
     } catch (error) {
       const query = {
@@ -44,12 +44,12 @@ class PlaylistSongsService {
         throw new NotFoundError('Song in Playlists not found.');
       }
 
-      await this._cacheService.set(`playlistsongs:${playlistId}`, JSON.stringify(result.rows));
+      await this._cacheService.set(`playlistsongs:${userId}-${playlistId}`, JSON.stringify(result.rows));
       return result.rows;
     }
   }
 
-  async deleteSongFromPlaylist(playlistId, songId) {
+  async deleteSongFromPlaylist({ playlistId, songId, userId }) {
     const query = {
       text: 'DELETE FROM playlistsongs WHERE playlist_id = $1 AND song_id = $2 RETURNING id',
       values: [playlistId, songId],
@@ -59,7 +59,7 @@ class PlaylistSongsService {
     if (!result.rowCount) {
       throw new InvariantError('Song failed to be removed from playlists.');
     }
-    await this._cacheService.delete(`playlistsongs:${playlistId}`);
+    await this._cacheService.delete(`playlistsongs:${userId}-${playlistId}`);
   }
 
   async verifyPlaylistSongs(playlistId, songId) {
